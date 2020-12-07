@@ -1,4 +1,4 @@
-getHoroscope()
+addHoroscope()
 
 
 
@@ -25,18 +25,37 @@ function getPickedDay() {
     return day
 }
 
-function getHoroscope() {
+function addHoroscope() {
     let btn = createBtn("knapp", "Knapp", "container")
     
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", async () => {
         let month = getPickedMonth()
-        
-        console.log(month)
-        if(month >= 1 && month <= 5) {
-            console.log("you picked the interwall", month)
-        }
+        let day = getPickedDay()
+
+        const blaha = await makeReq("./server/addHoroscope.php", "POST",)
+        console.log(blaha)
+
+
+
+        /*    
+            if(month >= 1 && month <= 5) {
+            console.log("you picked the interwall", " month=", month, " day=", day)
+            } 
+        */
 
     })
 }
 
-
+async function makeReq(path, method, body) {
+    try {
+        let response = await fetch(path, {
+            method,
+            body
+        })
+        console.log(response)
+        return response.json()
+    }
+    catch(err) {
+        console.log("Failed fetch", err)
+    }
+}
