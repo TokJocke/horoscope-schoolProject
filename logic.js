@@ -1,5 +1,6 @@
 addHoroscope()
-
+viewHoroscope()
+updateHoroscope()
 
 
 function createBtn(name, text, parent) {
@@ -25,27 +26,6 @@ function getPickedDay() {
     return day
 }
 
-function addHoroscope() {
-    let btn = createBtn("knapp", "Knapp", "container")
-    
-    btn.addEventListener("click", async () => {
-        let month = getPickedMonth()
-        let day = getPickedDay()
-
-        const blaha = await makeReq("./server/addHoroscope.php", "POST",)
-        console.log(blaha)
-
-
-
-        /*    
-            if(month >= 1 && month <= 5) {
-            console.log("you picked the interwall", " month=", month, " day=", day)
-            } 
-        */
-
-    })
-}
-
 async function makeReq(path, method, body) {
     try {
         let response = await fetch(path, {
@@ -58,4 +38,49 @@ async function makeReq(path, method, body) {
     catch(err) {
         console.log("Failed fetch", err)
     }
+}
+
+function addHoroscope() {
+    let btn = createBtn("knapp", "POST/ADD", "container")
+    
+    btn.addEventListener("click", async () => {
+        let month = getPickedMonth()
+        let day = getPickedDay()
+
+        const body = new FormData()
+        body.set("day", day)
+        body.set("month", month)
+
+        const testResponse = await makeReq("./server/addHoroscope.php", "POST", body)
+        console.log(testResponse)
+    })
+}
+
+function viewHoroscope() {
+    let btn = createBtn("knapp", "GET/VIEW", "container")
+    
+    btn.addEventListener("click", async () => {
+        let month = getPickedMonth()
+        let day = getPickedDay()
+
+
+        const testResponse = await makeReq("./server/viewHoroscope.php", "GET")
+        console.log(testResponse)
+    })
+}
+
+function updateHoroscope() {
+    let btn = createBtn("knapp", "POST/UPDATE", "container")
+    
+    btn.addEventListener("click", async () => {
+        let month = getPickedMonth()
+        let day = getPickedDay()
+
+        const body = new FormData()
+        body.set("day", day)
+        body.set("month", month)
+
+        const testResponse = await makeReq("./server/updateHoroscope.php", "POST", body)
+        console.log(testResponse)
+    })
 }
