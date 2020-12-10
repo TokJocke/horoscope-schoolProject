@@ -27,14 +27,6 @@ function starSigns($day, $month) {
 
 
 
-//Vill inte hämta JS funktioner. Kanske borde köra en POST eller liknande för att importa värdet för $day och $month
 
-
-//Kanske skapa funktionen med parametrar sen exporta funktionen till addHoroscope för att där ta emot datum i POST och
-//sen använda dessa som parametrar när jag kallar på funktionen.. 
-
-
-
-//$month == x && $day > x ) || ( $month == x && $day < x ) ) { $sign = "X" }
 
 ?>
