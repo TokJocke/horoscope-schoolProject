@@ -29,14 +29,17 @@ body {
 }
 
 header {
-     background: linear-gradient(90deg, transparent, rgba(211, 211, 211, 0.3));
-
-     
-
+    background: linear-gradient(90deg, transparent, rgba(211, 211, 211, 0.3));
+    letter-spacing: .1em;
+    color: #FFFFFF;
+    text-shadow: 3px 5px 2px #474747;   
+    height: 8vh;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    align-items: center;
     margin-bottom: 10vh;
+    padding-right: 2vw;
     
 }
 
@@ -44,6 +47,15 @@ header {
     font-size: 1.5em;
     margin-bottom: 1.5vh;
     border-radius: 10px;
+    box-shadow: 5px 5px 10px black;
+
+
+}
+
+#datePicker:hover {
+    background-color: darkgray;
+    color: white;
+    box-shadow: none;
 
 }
 
@@ -52,8 +64,37 @@ header {
     letter-spacing: 0.3em;
     border-radius: 10px;
     border: none;
+    cursor: pointer;
+    outline:none;
+    padding: 5px;
+    box-shadow: 5px 5px 10px black;
+
+
+}
+
+.knapp:hover {
+    background-color: darkgray;
+    color: white;
+}
+.knapp:active {
+    text-decoration: none; 
+    box-shadow: inset 0px 0px 20px white;
+    color: black;
 }
 
 .knapp:not(:last-child) {
     margin-bottom: 1.5vh;
+}
+
+#responseDiv {
+    margin-top: 2vh;
+    font-size: 1.5em;
+    color: #FFFFFF;
+    background: #ece9e9;
+    text-shadow: 3px 5px 2px #474747;   
+    background-color: rgba(211, 211, 211, 0.2);
+    padding: 10px;
+    border-radius: 10px;
+    display:flex;
+    flex-direction: column;
 }

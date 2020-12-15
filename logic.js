@@ -1,18 +1,29 @@
-saveHS()
-updateHS()
-deleteHS()
-showResponse()
+window.addEventListener("load", initSite())
+
+async function initSite() {
+    await saveHS()
+    await updateHS()
+    await deleteHS()
+    await showResponse()
+}
 
 //Skapa if/else för knapparna med hjälp av echo från php. Om echo = false/true
 //Diven syns bara när saveHS() kallas på.. Kanske skapa en funktion som skapar diven och som sen kallas på i saveHS()
 //En funktion för viewHS som skapar innehåll om det finns och saveHS uppdaterar viewHS
-function createBtn(name, text, parent) {
+function createBtn(name, text, parent, id) {
     let btn = document.createElement("button")
     parent = document.getElementById(parent)
     btn.className = name
+    btn.id = id
     btn.innerText = text
     parent.appendChild(btn)
     return btn
+}
+
+function removeById(id) {
+    id = document.getElementById(id)
+    id.remove()
+
 }
 
 function getPickedMonth() {
@@ -108,14 +119,19 @@ async function updateHS() {
     let response = await viewHoroscope() 
     
     if(response) {
-        let btn = createBtn("knapp", "Update horoscope", "container")       
+        let btn = createBtn("knapp", "Update horoscope", "container", "updateBtn")       
         btn.addEventListener("click", async () => {  
             await updateHoroscope()    
             showResponse()  
-            btn.remove()
         })  
     }
+/*     else if(!response) {
+        removeById("updateBtn")
+   
+    } */
 }  
+
+
 //Ta bort sparat horoskåp
 async function deleteHS()  {
     let response = await viewHoroscope()     
@@ -124,7 +140,7 @@ async function deleteHS()  {
         btn.addEventListener("click", async () => {
             await deleteHoroscope()
             await saveHS()
-            await updateHS()
+            removeById("updateBtn")
             await showResponse()
             btn.remove()
         })
