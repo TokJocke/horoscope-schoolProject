@@ -8,19 +8,23 @@ try {
     
     if(isset($_SERVER["REQUEST_METHOD"])) {
         if($_SERVER["REQUEST_METHOD"] === "POST") {
-            
-            $myDay = $_POST["day"];
-            $myMonth = $_POST["month"];
-       /*      $date = json_encode($_POST["month"] . " " . $_POST["day"]);
 
-            echo($date);
- */
-            starSigns($myDay, $myMonth);
+            if(!isset($_SESSION["sign"])) {
 
-            echo(json_encode(starSigns($myDay, $myMonth)));
-
+                $myDay = $_POST["day"];
+                $myMonth = $_POST["month"];
+                $sign = starSigns($myDay, $myMonth);
             
-            
+    
+                $_SESSION["sign"] = serialize($sign);
+    
+                echo json_encode(true);
+                exit;
+            }
+            else {
+                echo json_encode(false);
+                exit;
+            }
         }
     }
 

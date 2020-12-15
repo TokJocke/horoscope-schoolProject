@@ -7,11 +7,14 @@ try {
     if(isset($_SERVER["REQUEST_METHOD"])) {
         if($_SERVER["REQUEST_METHOD"] === "GET") {
             
-            echo(json_encode("You made it to viewHoroscope"));
-
-            
-
-            
+            if(isset($_SESSION["sign"])) {
+         
+                echo json_encode(unserialize($_SESSION["sign"]));
+            }
+            else {
+                echo json_encode(false);
+            }
+     
             
         }
     }
