@@ -7,9 +7,6 @@ async function initSite() {
     await showResponse()
 }
 
-//Skapa if/else för knapparna med hjälp av echo från php. Om echo = false/true
-//Diven syns bara när saveHS() kallas på.. Kanske skapa en funktion som skapar diven och som sen kallas på i saveHS()
-//En funktion för viewHS som skapar innehåll om det finns och saveHS uppdaterar viewHS
 function createBtn(name, text, parent, id) {
     let btn = document.createElement("button")
     parent = document.getElementById(parent)
@@ -46,12 +43,13 @@ async function makeReq(path, method, body) {
             method,
             body
         })
-        console.log(response)
+
         return response.json()
+        
     }
-    catch(err) {
-        console.log("Failed fetch", err)
-    }
+     catch(err) {
+          console.error("Failed fetch", err)
+      } 
 }
 
 async function addHoroscope() {
@@ -60,9 +58,8 @@ async function addHoroscope() {
     const body = new FormData()
     body.set("day", day)
     body.set("month", month)
-    const testResponse = await makeReq("./server/addHoroscope.php", "POST", body)
-    return testResponse
-    
+    const testResponse = await makeReq("./server/addHoroscope.php", "POST", body) 
+    console.log(testResponse)    
 }
 
 async function viewHoroscope() {
@@ -125,10 +122,7 @@ async function updateHS() {
             showResponse()  
         })  
     }
-/*     else if(!response) {
-        removeById("updateBtn")
-   
-    } */
+
 }  
 
 
